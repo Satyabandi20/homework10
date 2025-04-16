@@ -45,6 +45,22 @@ engine = create_async_engine(TEST_DATABASE_URL, echo=settings.debug)
 AsyncTestingSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 AsyncSessionScoped = scoped_session(AsyncTestingSessionLocal)
 
+@pytest.fixture
+def async_client():
+    client = TestClient(app)
+    return client
+
+@pytest.fixture
+def user_token():
+    return create_access_token(data={"sub": "john_doe", "role": UserRole.AUTHENTICATED.value})
+
+@pytest.fixture
+def admin_token():
+    return create_access_token(data={"sub": "admin_member", "role": UserRole.ADMIN.value})
+
+@pytest.fixture
+def manager_token():
+    return create_access_token(data={"sub": "manager_chris", "role": UserRole.MANAGER.value})
 
 @pytest.fixture
 def email_service():
