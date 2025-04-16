@@ -25,21 +25,21 @@ The application passed all test cases and achieved **95% test coverage**.
 
 Rather than just fixing bugs, I treated each issue like an opportunity to improve developer experience and user safety.
 
-Nickname Validation (#9): Users could submit weird nicknames like “john@doe”, which passed silently. I fixed the regex, added custom messages, and ensured minimum length enforcement.
+- **[Nickname Validation (#9)](https://github.com/Satyabandi20/homework10/issues/9):** Users could submit weird nicknames like “john@doe”, which passed silently. I fixed the regex, added custom messages, and ensured minimum length enforcement.
+  
+- **[Password Strength (#11)](https://github.com/Satyabandi20/homework10/issues/11):** The original validation was lax. I enforced a secure password policy requiring uppercase, lowercase, digits, and special characters — and backed it with solid tests.
 
-Password Strength (#11): The original validation was lax. I enforced a secure password policy requiring uppercase, lowercase, digits, and special characters — and backed it with solid tests.
+- **[Email Fixture Test Failures (#7)](https://github.com/Satyabandi20/homework10/issues/7):** Existing tests were brittle due to missing or incorrect email service mock fixtures. I refactored the setup and cleaned up the test suite.
 
-Email Fixture Test Failures (#7): Existing tests were brittle due to missing or incorrect email service mock fixtures. I refactored the setup and cleaned up the test suite.
+- **[Schema Mismatches (#5)](https://github.com/Satyabandi20/homework10/issues/5):** Some `UserCreate` and `UserResponse` schemas lacked fields or had incorrect types compared to the model. I synchronized all contracts with testable models.
 
-Schema Mismatches (#5): Some UserCreate and UserResponse schemas lacked fields or had incorrect types compared to the model. I synchronized all contracts with testable models.
+- **[Profile Edge Cases (#15)](https://github.com/Satyabandi20/homework10/issues/15):** I validated combinations like updating only bio, only profile picture, or both — making sure they didn’t silently fail or overwrite unintended fields.
 
-Profile Edge Cases (#15): I validated combinations like updating only bio, only profile picture, or both — making sure they didn’t silently fail or overwrite unintended fields.
+- **[Token Fixtures & Auth Coverage (#1)](https://github.com/Satyabandi20/homework10/issues/1):** Tests needing tokens were failing. I implemented token fixtures for different roles (user, manager, admin) and ensured proper test isolation.
 
-Token Fixtures & Auth Coverage (#1): Tests needing tokens were failing. I implemented token fixtures for different roles (user, manager, admin) and ensured proper test isolation.
+- **[Trivy Vulnerability Scan (#13)](https://github.com/Satyabandi20/homework10/issues/13):** I addressed high/critical issues (CVE-2024-36039, CVE-2024-33663, etc.) by updating versions in `requirements.txt` to secure the stack without breaking the build.
 
-Trivy Vulnerability Scan (#13): I addressed high/critical issues (CVE-2024-36039, CVE-2024-33663, etc.) by updating versions in requirements.txt to secure the stack without breaking the build.
-
-Duplicate Nickname Fixture (#3): Some test fixtures reused nicknames, causing uniqueness violations. I fixed it by using faker.unique.user_name() and resetting between tests.
+- **[Duplicate Nickname Fixture (#3)](https://github.com/Satyabandi20/homework10/issues/3):** Some test fixtures reused nicknames, causing uniqueness violations. I fixed it by using `faker.unique.user_name()` and resetting between tests.
 
 ---
 
