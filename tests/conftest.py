@@ -16,7 +16,7 @@ Fixtures:
 # Standard library imports
 from builtins import range
 from datetime import datetime
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 from uuid import uuid4
 
 # Third-party imports
@@ -64,9 +64,13 @@ def manager_token():
 
 @pytest.fixture
 def email_service():
-    # Assuming the TemplateManager does not need any arguments for initialization
     template_manager = TemplateManager()
     email_service = EmailService(template_manager=template_manager)
+
+    mock_smtp = MagicMock()
+    mock_smtp.send_email.return_value = None
+    email_service.smtp_client = mock_smtp
+
     return email_service
 
 
