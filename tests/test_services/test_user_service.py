@@ -156,3 +156,28 @@ async def test_unlock_user_account(db_session, locked_user):
     assert unlocked, "The account should be unlocked"
     refreshed_user = await UserService.get_by_id(db_session, locked_user.id)
     assert not refreshed_user.is_locked, "The user should no longer be locked"
+
+@pytest.mark.asyncio
+async def test_update_only_bio(db_session, user):
+    updated = await UserService.update(db_session, user.id, {"bio": "Updated bio only"})
+    assert updated.bio == "Updated bio only"
+
+@pytest.mark.asyncio
+async def test_update_only_profile_picture(db_session, user):
+    updated = await UserService.update(db_session, user.id, {
+        "profile_picture_url": "https://example.com/new-pic.jpg"
+    })
+    assert updated.profile_picture_url == "https://example.com/new-pic.jpg"
+
+@pytest.mark.asyncio
+async def test_update_bio_and_picture(db_session, user):
+    updated = await UserService.update(db_session, user.id, {
+        "bio": "New bio", "profile_picture_url": "https://example.com/pic.jpg"
+    })
+    assert updated.bio == "New bio"
+    assert updated.profile_picture_url == "https://example.com/pic.jpg"
+
+@pytest.mark.asyncio
+async def test_update_with_empty_payload(db_session, user):
+    result = await UserService.update(db_session, user.id, {})
+    assert result is None  # or handle validation failure
